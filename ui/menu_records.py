@@ -30,12 +30,13 @@ def menu_records(current_user):
         choice = input("Выберите действие: ")
 
         if choice == "1":
-            records = get_all_records(current_user.id)  # Записи уже отсортированы в БД
+            records = get_all_records(current_user.id)
             if not records:
                 print("Записи не найдены.")
             else:
+                sorted_records = sorted(records, key=lambda r: r.id)
                 print("\nСписок записей (отсортировано по ID):")
-                for r in records:
+                for r in sorted_records:
                     cat_name = get_category_name(r.category_id)
                     print(f"{r.id}. {r.date} | {cat_name} | {float(r.sum):.2f} руб.")
             input("Нажмите Enter для продолжения...")
